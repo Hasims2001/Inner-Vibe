@@ -6,11 +6,12 @@ const changingBorder ={
             field:{
                 backgroundColor : 'brand.200',
                 borderColor : 'brand.400',
+                
                 rounded: 'md',
                 _hover : 'disabled',
-                _focus:{
-                    borderColor : 'brand.100',
-                }
+                // _focus:{
+                //     borderColor : 'brand.100',
+                // }
             }
         },
     }
@@ -20,7 +21,8 @@ const Theme = extendTheme({
     colors: {
         brand:{
             100:"#121212", //dark black
-            200:"#1c1c1c", //light black
+            // 200:"#1c1c1c", //light black
+            200:"#2d2d2d", //light black
             300:"#F6FF96", //yellow
             400:"#86FFA3", //light green
             500:"#5BD7FC", //light blue
@@ -32,6 +34,11 @@ const Theme = extendTheme({
         heading : `Work Sans, ${base.fonts.heading}`,
         body : `Work Sans, ${base.fonts.body}`
 
+    },
+    bgGradient:{
+      temp:{
+        primy : "linear(to-r, #5BD7FC,#86FFA3, #F6FF96 )"
+      }
     },
    
     components : {
@@ -92,7 +99,7 @@ const Theme = extendTheme({
                 control:{
                     _focus:{
                         ring : 2,
-                        ringColor : "brand.600"
+                        ringColor : "brand.400"
                     }
                 }
              }

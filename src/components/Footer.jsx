@@ -8,6 +8,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import Theme from "../contextProvider/Theme";
 function Footer() {
   const links = [
     { title: "Treatment", to: "/Treatment" },
@@ -24,7 +25,7 @@ function Footer() {
   return (
     <HStack
       justifyContent={"space-between"}
-      m={"50px 190px"}
+      m={"50px 190px 0px 190px"}
       pb={"50px"}
       alignItems={"flex-start"}
     >
@@ -103,7 +104,12 @@ function Footer() {
         <Heading as={"h5"} size={"md"} lineHeight={"lg"}>
           NewsLetter
         </Heading>
-        <Input type="email" placeholder="Your Email" size={"sm"}></Input>
+        <Input
+          type="email"
+          placeholder="Your Email"
+          size={"sm"}
+          background={"brand.200"}
+        ></Input>
         <Button variant={"GradientPrimary"} size={"sm"}>
           Subscribe Now
         </Button>

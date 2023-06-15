@@ -1,0 +1,9 @@
+### 
+POST http://important-boot-bat.cyclic.app/users  HTTP/1.1
+content-type: "application/json"
+
+{
+    "name": "Hasim",
+    "email": "Hasim@developer.com",
+    "password": "Hasim"
+}
