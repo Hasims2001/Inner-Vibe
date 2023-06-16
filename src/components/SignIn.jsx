@@ -60,10 +60,10 @@ export default function SignIn() {
     dispatch({ type: "LOADING" });
     getData();
 
-    value.map(({ name, email, password }) => {
+    value.map(({ id, name, email, password }) => {
       if (email === data.email && password === data.password) {
         flag = true;
-        loginUser({ name: name, email: email });
+        loginUser({ id: id, name: name, email: email });
       }
     });
     dispatch({ type: "LOADING_COMPLETED" });

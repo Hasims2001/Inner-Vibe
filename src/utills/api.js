@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseurl = `https://important-boot-bat.cyclic.app`;
+const baseurl = `https://inner-vibe.onrender.com`;
 // get
 export  function fetchData (){
     let url = `${baseurl}/products`;
@@ -24,3 +24,9 @@ export function postUserData (data){
     return axios.post(`${url}`, {...data});
 }
 
+
+// sale post
+export function postSalesData (data){
+    let url = `${baseurl}/sales`;
+    return axios.post(`${url}`, {...data});
+}
