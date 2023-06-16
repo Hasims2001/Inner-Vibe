@@ -9,12 +9,16 @@ import {
   Container,
   SkeletonCircle,
   SkeletonText,
+  Select,
+  Input,
 } from "@chakra-ui/react";
 import Theme from "../contextProvider/Theme";
 import uprightarrow from "../img/up-right-arrow.png";
 import { fetchData } from "../utills/api.js";
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { reducer } from "../utills/reducer.js";
 const init = {
   loading: true,
@@ -22,31 +26,11 @@ const init = {
   error: false,
 };
 
-// const TreatmentReducer = (state, { type, payload }) => {
-//   switch (type) {
-//     case "LOADING":
-//       return {
-//         ...state,
-//         loading: true,
-//       };
-//     case "FATCHED":
-//       return {
-//         ...state,
-//         loading: false,
-//         data: payload,
-//       };
-//     case "ERROR":
-//       return {
-//         ...state,
-//         loading: false,
-//         error: true,
-//       };
-//     default: {
-//       throw new Error("Action type does not match!");
-//     }
-//   }
-// };
 function Treatment() {
+  const [sorting, setsorting] = useState("");
+  const [search, setSearch] = useState("");
+  const [state, dispatch] = useReducer(reducer, init);
+  const { loading, data, error } = state;
   useEffect(() => {
     dispatch({ type: "LOADING" });
     fetchData()
@@ -54,10 +38,7 @@ function Treatment() {
         dispatch({ type: "FATCHED", payload: res?.data });
       })
       .catch((err) => dispatch({ type: "ERROR", payload: err }));
-  }, []);
-
-  const [state, dispatch] = useReducer(reducer, init);
-  const { loading, data, error } = state;
+  }, [sorting, search]);
 
   if (loading) {
     return (
@@ -109,9 +90,32 @@ function Treatment() {
           We offer a wide range of therapies and booster <br /> suppliments
         </Text>
       </HStack>
-      {/* <HStack></HStack> */}
+      <br />
+      <br />
+      <HStack spacing={20}>
+        <Input
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <Select
+          onChange={(e) => {
+            setsorting(e.target.value);
+          }}
+        >
+          <option value={""} style={{ backgroundColor: "#2d2d2d" }}>
+            Sort By Price
+          </option>
+          <option style={{ backgroundColor: "#2d2d2d" }} value={"asc"}>
+            Low to High
+          </option>
+          <option style={{ backgroundColor: "#2d2d2d" }} value={"desc"}>
+            High to Low
+          </option>
+        </Select>
+      </HStack>
       <SimpleGrid spacing={5} columns={3} m={"40px 0"}>
-        {data.map(({ id, name, price }) => (
+        {data.map(({ id, name, price, lightIcon, darkIcon, iconColor }) => (
           <GridItem
             key={id}
             backgroundColor={"brand.200"}
@@ -121,6 +125,11 @@ function Treatment() {
           >
             {/* <Box id={`firstlook${id}`}> */}
             <Link to={`/SingleTreatment/${id}`}>
+              <FontAwesomeIcon
+                icon={lightIcon}
+                fontSize={"50px"}
+                style={{ color: iconColor }}
+              />
               <Text fontSize={"lg"} m={"10px 0"}>
                 {name}
               </Text>

@@ -1,5 +1,6 @@
 import { AuthContext } from "../contextProvider/AuthContextProvider";
 import { useContext } from "react";
+import { Navigate } from "react-router-dom";
 import {
   Heading,
   Box,
@@ -19,9 +20,9 @@ function Profile() {
     data: [],
     error: false,
   });
-  //   if (!authState.isAuth) {
-  //     return <Navigate to="/SignIn" />;
-  //   }
+  if (!authState.isAuth) {
+    return <Navigate to="/SignIn" />;
+  }
   return (
     <Box m={"30px"}>
       <Heading>Profile</Heading>
@@ -67,6 +68,13 @@ function Profile() {
               Order History
             </Text>
             <hr />
+            <VStack m={"20px 0"} alignItems={"flex-start"}>
+              <Text>Order 1</Text>
+              <Text>Order 2</Text>
+              <Text>Order 3</Text>
+              <Text>Order 4</Text>
+              <Text>Order 5</Text>
+            </VStack>
           </Card>
         </Container>
       </VStack>
