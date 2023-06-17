@@ -1,12 +1,12 @@
 import { AuthContext } from "../contextProvider/AuthContextProvider";
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-function PrivateRouters({ children }) {
+function AdminPrivateRouters({ children }) {
   const { authState } = useContext(AuthContext);
-  // if (!authState.isAuth) {
-  //   return <Navigate to="/Signin"></Navigate>;
+  // if (!authState.isAdminAuth) {
+  //   return <Navigate to="/Admin"></Navigate>;
   // }
 
   return children;
 }
-export default PrivateRouters;
+export default AdminPrivateRouters;

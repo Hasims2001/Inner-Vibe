@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { fetchData } from "../utills/api.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { reducer } from "../utills/reducer.js";
-
+import Loading from "./Loading";
+import Error from "./Error.jsx";
 function Cart() {
   const [state, dispatch] = useReducer(reducer, {
     loading: false,
@@ -15,6 +16,8 @@ function Cart() {
   const { loading, data, error } = state;
   let cartIds = JSON.stringify(localStorage.getItem("cartId")) || [];
   cartIds = JSON.parse(cartIds);
+  // let cartIds = localStorage.getItem("cartId") || [];
+
   useEffect(() => {
     dispatch({ type: "LOADING" });
     const fetchDataIds = async () => {
@@ -41,21 +44,17 @@ function Cart() {
     dispatch({ type: "LOADING" });
   }, []);
 
+  const setRemove = (id) => {
+    console.log(cartIds);
+    // let filtered = cartIds.filter((item) => item.id !== id);
+    // console.log(filtered);
+  };
+
   if (loading) {
-    return (
-      <Box mt={"30px"}>
-        <Heading>Loading...</Heading>
-      </Box>
-    );
+    return <Loading />;
   }
   if (error) {
-    return (
-      <Box mt={"30px"}>
-        <Heading>
-          Something Went Wrong... <br /> Please Try Again....
-        </Heading>
-      </Box>
-    );
+    return <Error />;
   }
   return (
     <Box m={"30px 0"}>
@@ -89,9 +88,11 @@ function Cart() {
                   <Text>{name}</Text>
                 </HStack>
                 <Button
+                  id={id}
                   w={"5px"}
                   borderRadius={"full"}
                   variant={"GradientPrimary"}
+                  onClick={(e) => setRemove(e.target.id)}
                 >
                   X
                 </Button>

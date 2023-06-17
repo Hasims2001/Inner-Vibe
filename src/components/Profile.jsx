@@ -1,6 +1,8 @@
 import { AuthContext } from "../contextProvider/AuthContextProvider";
-import { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import Loading from "./Loading";
+import Error from "./Error";
 import {
   Heading,
   Box,
@@ -10,19 +12,42 @@ import {
   Image,
   Text,
   VStack,
+  Button,
 } from "@chakra-ui/react";
 import { reducer } from "../utills/reducer";
 import { useReducer } from "react";
+import { fetchSalesData } from "../utills/api";
 function Profile() {
+  let navigate = useNavigate();
   const { authState } = useContext(AuthContext);
   const [state, dispatch] = useReducer(reducer, {
     loading: true,
     data: [],
     error: false,
   });
-  if (!authState.isAuth) {
-    return <Navigate to="/SignIn" />;
+  const { loading, data, error } = state;
+
+  useEffect(() => {
+    dispatch({ type: "LOADING" });
+    const fetching = async () => {
+      try {
+        let res = await fetchSalesData(authState.id);
+        res = await res?.data;
+        dispatch({ type: "FATCHED", payload: res });
+      } catch (error) {
+        dispatch({ type: "ERROR" });
+        console.log(error);
+      }
+    };
+    // fetching();
+  }, []);
+  if (loading) {
+    return <Loading />;
   }
+  if (error) {
+    return <Error />;
+  }
+
   return (
     <Box m={"30px"}>
       <Heading>Profile</Heading>
@@ -58,6 +83,17 @@ function Profile() {
                 <Text fontSize={"lg"} color={"brand.600"}>
                   Email : {authState.email}
                 </Text>
+                <br />
+                <Button
+                  variant={"GradientPrimary"}
+                  onClick={() => {
+                    localStorage.setItem("flag", "false");
+                    localStorage.removeItem("cartId");
+                    navigate("/");
+                  }}
+                >
+                  Sign Out
+                </Button>
               </Box>
             </HStack>
           </Card>
@@ -69,11 +105,12 @@ function Profile() {
             </Text>
             <hr />
             <VStack m={"20px 0"} alignItems={"flex-start"}>
-              <Text>Order 1</Text>
-              <Text>Order 2</Text>
-              <Text>Order 3</Text>
-              <Text>Order 4</Text>
-              <Text>Order 5</Text>
+              {data.map((item) => (
+                <Box>
+                  <Text>Appoinment : {item.appoinment}</Text>
+                  <Text>Payment Mode : {item.payment}</Text>
+                </Box>
+              ))}
             </VStack>
           </Card>
         </Container>

@@ -10,15 +10,15 @@ import Theme from './contextProvider/Theme';
 import AuthContextProvider from './contextProvider/AuthContextProvider';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ChakraProvider theme={Theme}>
     <AuthContextProvider>
+  <ChakraProvider theme={Theme}>
     <ThemeContextProvider >
       <BrowserRouter>
     <App />
     </BrowserRouter>
     </ThemeContextProvider>
-    </AuthContextProvider>
   </ChakraProvider>
+    </AuthContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

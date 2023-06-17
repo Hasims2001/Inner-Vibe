@@ -6,10 +6,18 @@ function AuthContextProvider(props) {
   const obj = {
     authState: {
       isAuth: false,
+      isAdminAuth: false,
       id: 0,
       name: "",
       email: "",
     },
+    loginAdmin: () => {
+      obj.authState.isAdminAuth = true;
+    },
+    logoutAdmin: () => {
+      obj.authState.isAdminAuth = false;
+    },
+
     loginUser: (data) => {
       obj.authState.id = data.id;
       obj.authState.name = data.name;
