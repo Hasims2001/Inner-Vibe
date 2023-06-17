@@ -14,12 +14,14 @@ import {
 } from "@chakra-ui/react";
 import Theme from "../contextProvider/Theme";
 import uprightarrow from "../img/up-right-arrow.png";
-import { fetchData } from "../utills/api.js";
+import { fetchProductData } from "../utills/api.js";
 import { useEffect, useReducer, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { reducer } from "../utills/reducer.js";
+
+import { DebounceInput } from "react-debounce-input";
 const init = {
   loading: true,
   data: [],
@@ -33,11 +35,15 @@ function Treatment() {
   const { loading, data, error } = state;
   useEffect(() => {
     dispatch({ type: "LOADING" });
-    fetchData()
-      .then((res) => {
+    const fetching = async (sorting, search) => {
+      try {
+        let res = await fetchProductData(sorting, search);
         dispatch({ type: "FATCHED", payload: res?.data });
-      })
-      .catch((err) => dispatch({ type: "ERROR", payload: err }));
+      } catch (error) {
+        dispatch({ type: "ERROR" });
+      }
+    };
+    fetching(sorting, search);
   }, [sorting, search]);
 
   if (loading) {
@@ -49,10 +55,9 @@ function Treatment() {
             We offer a wide range of therapies and booster <br /> suppliments
           </Text>
         </HStack>
-
         <SimpleGrid spacing={5} columns={3} m={"40px 0"}>
-          {new Array(20).fill(0).map(() => (
-            <GridItem>
+          {new Array(20).fill(0).map((i, ind) => (
+            <GridItem key={ind}>
               <Box
                 padding="50px"
                 m={"10px 0"}
@@ -93,12 +98,29 @@ function Treatment() {
       <br />
       <br />
       <HStack spacing={20}>
-        <Input
+        {/* <Input
           placeholder="Search..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+        /> */}
+        <DebounceInput
+          className="px-2"
+          style={{
+            backgroundColor: "#2d2d2d",
+            padding: "10px",
+            borderRadius: "10px",
+            color: "white",
+            outline: "none",
+            border: "1px solid #86FFA3",
+          }}
+          placeholder="search here..."
+          minLength={1}
+          value={search}
+          debounceTimeout={1000}
+          onChange={(e) => setSearch(e.target.value)}
         />
         <Select
+          value={sorting}
           onChange={(e) => {
             setsorting(e.target.value);
           }}
@@ -123,7 +145,6 @@ function Treatment() {
             boxShadow="lg"
             p={"50px"}
           >
-            {/* <Box id={`firstlook${id}`}> */}
             <Link to={`/SingleTreatment/${id}`}>
               <FontAwesomeIcon
                 icon={lightIcon}

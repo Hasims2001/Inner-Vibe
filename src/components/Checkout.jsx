@@ -21,6 +21,7 @@ import { AuthContext } from "../contextProvider/AuthContextProvider";
 import { reducer } from "../utills/reducer";
 import { postSalesData } from "../utills/api";
 import { useNavigate } from "react-router-dom";
+import Error from "./Error";
 function Checkout() {
   const [appoinment, setAppoinment] = useState("");
   const [payment, setPayment] = useState("");
@@ -28,14 +29,15 @@ function Checkout() {
   const [status, setStatus] = useState(false);
   let navigate = useNavigate();
   let total = JSON.stringify(localStorage.getItem("total"));
+  let cartId = localStorage.getItem("cartId");
   total = JSON.parse(total);
-
+  console.log(cartId);
   const [state, dispatch] = useReducer(reducer, {
     loading: false,
     error: false,
   });
   if (!total) {
-    return <Heading>Something went wrong... Please try again...</Heading>;
+    return <Error />;
   }
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,7 +54,8 @@ function Checkout() {
         let res = await postSalesData(val);
         setStatus(true);
         dispatch({ type: "LOADING_COMPLETED" });
-
+        localStorage.removeItem("total");
+        localStorage.removeItem("cartId");
         setTimeout(() => {
           navigate("/");
         }, 4000);

@@ -91,6 +91,9 @@ const Theme = extendTheme({
         Input:{
             ...changingBorder
         },
+        DebounceInput:{
+            ...changingBorder
+        },
         Select :{
             ...changingBorder
         },

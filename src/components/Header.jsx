@@ -1,16 +1,24 @@
 import { Image, Heading, Box, Stack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import logo from "../img/translogo.png";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Theme from "../contextProvider/Theme";
 import { ThemeContext } from "../contextProvider/ThemeContextProvider";
 import { AuthContext } from "../contextProvider/AuthContextProvider";
 function Header() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { authState } = useContext(AuthContext);
-
   const bgcolorCode = theme ? "#2d2d2d" : "#FFFFFF";
   const colorCode = theme ? "#FFFFFF" : "#121212";
+  // let flag = false;
+  // useEffect(() => {
+  //   if (authState.isAuth) {
+  //     flag = true;
+  //   } else {
+  //     flag = false;
+  //   }
+  // }, []);
+
   const btn = [
     { title: "Treatment", to: "/Treatment" },
     { title: "Blog", to: "/Blog" },
@@ -59,7 +67,7 @@ function Header() {
             <Link to={"/SignIn"}>Sign in/Sign up</Link>
           </Box>
         )}
-        {authState.isAuth && (
+        {!authState.isAuth && (
           <Box
             bgGradient={"linear(to-r, #5BD7FC,#86FFA3, #F6FF96 )"}
             color={"brand.100"}

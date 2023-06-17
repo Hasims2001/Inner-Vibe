@@ -5,18 +5,19 @@ import {
   Input,
   FormHelperText,
   HStack,
-  Heading,
   Image,
   Checkbox,
+  Alert,
+  AlertIcon,
   Text,
 } from "@chakra-ui/react";
 import { useReducer, useContext, useState } from "react";
-import Theme from "../contextProvider/Theme";
 import { reducer } from "../utills/reducer.js";
 import { getUserData, postUserData } from "../utills/api";
 import { AuthContext } from "../contextProvider/AuthContextProvider";
 import { useNavigate } from "react-router-dom";
-
+import Error from "./Error";
+import Loading from "./Loading";
 const init = {
   loading: false,
   data: {
@@ -33,16 +34,32 @@ export default function SignIn() {
   const { loading, data, error } = state;
   const { name, email, password } = data;
   const [value, setValue] = useState([]);
+  const [status, setStatus] = useState(false);
 
   const handleSignUp = (e) => {
     e.preventDefault();
 
     dispatch({ type: "LOADING" });
-    postUserData(data)
-      .then((res) => {
-        loginUser({ name: data.name, email: data.email });
-      })
-      .catch((err) => dispatch({ type: "ERROR" }));
+    const posting = async () => {
+      try {
+        let res = await postUserData(data);
+
+        res = await res?.data;
+        if (res) {
+          loginUser({ id: res.id, name: res.name, email: res.email });
+          setStatus(true);
+          setTimeout(() => {
+            localStorage.setItem("flag", true);
+            navigate("/");
+          }, 2000);
+        }
+        dispatch({ type: "LOADING_COMPLETED" });
+      } catch (err) {
+        dispatch({ type: "ERROR" });
+      }
+    };
+
+    posting();
   };
   const getData = async () => {
     try {
@@ -63,6 +80,7 @@ export default function SignIn() {
     value.map(({ id, name, email, password }) => {
       if (email === data.email && password === data.password) {
         flag = true;
+        localStorage.setItem("flag", true);
         loginUser({ id: id, name: name, email: email });
       }
     });
@@ -80,6 +98,12 @@ export default function SignIn() {
     vi.style.display = "flex";
     hi.style.display = "none";
   };
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <Error />;
+  }
   return (
     <Box m={"30px 0px 60px 0px"}>
       <HStack mb={"20px"}>
@@ -104,6 +128,14 @@ export default function SignIn() {
           </Text>
         </Box>
       </HStack>
+      {status && (
+        <HStack m={"30px 0"} color={"brand.100"} fontSize={"xl"}>
+          <Alert status="success" borderRadius={"10px"}>
+            <AlertIcon />
+            You are logged in successfully...
+          </Alert>
+        </HStack>
+      )}
       <HStack
         id="signup"
         justifyContent={"space-between"}

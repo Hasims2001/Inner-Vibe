@@ -15,6 +15,8 @@ import {
 import { singleData } from "../utills/api.js";
 import { reducer } from "../utills/reducer.js";
 import { AuthContext } from "../contextProvider/AuthContextProvider";
+import Error from "./Error";
+import Loading from "./Loading";
 function SingleTreatment() {
   const { tId } = useParams();
   const navigate = useNavigate();
@@ -81,20 +83,10 @@ function SingleTreatment() {
   };
 
   if (loading) {
-    return (
-      <Box mt={"30px"}>
-        <Heading>Loading...</Heading>
-      </Box>
-    );
+    return <Loading />;
   }
   if (error) {
-    return (
-      <Box mt={"30px"}>
-        <Heading>
-          Something Went Wrong... <br /> Please Try Again....
-        </Heading>
-      </Box>
-    );
+    return <Error />;
   }
 
   if (!data) {
