@@ -2,7 +2,7 @@ import {
   Image,
   Heading,
   Box,
-  Text,
+  useToast,
   AlertIcon,
   Input,
   VStack,
@@ -15,36 +15,60 @@ import {
   Alert,
 } from "@chakra-ui/react";
 import paymentImg from "../img/payment.png";
-import { useState, useReducer } from "react";
+import { useState, useReducer, useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../contextProvider/AuthContextProvider";
 import { reducer } from "../utills/reducer";
-import { postSalesData } from "../utills/api";
+import { postSalesData, fetchbyId } from "../utills/api";
 import { useNavigate } from "react-router-dom";
-import Error from "./Error";
+import Loading from "./Loading";
+
 function Checkout() {
   const [appoinment, setAppoinment] = useState("");
   const [payment, setPayment] = useState("");
   const { authState } = useContext(AuthContext);
+  const toast = useToast();
   const [status, setStatus] = useState(false);
   let navigate = useNavigate();
   let total = JSON.stringify(localStorage.getItem("total"));
   let cartId = localStorage.getItem("cartId");
   total = JSON.parse(total);
-  console.log(cartId);
   const [state, dispatch] = useReducer(reducer, {
     loading: false,
+
     error: false,
   });
-  if (!total) {
-    return <Error />;
-  }
+  const [cardNum, setCardNum] = useState([]);
+  const [productData, setProductData] = useState([]);
+  let date = new Date();
+  useEffect(() => {
+    for (let i = 0; i < cartId.length; i++) {
+      if (Number(cartId[i]) && !cardNum.includes(Number(cartId[i]))) {
+        setCardNum([...cardNum, Number(cartId[i])]);
+      }
+    }
+    const getData = async () => {
+      try {
+        for (let i = 0; i < cardNum.length; i++) {
+          let res = await fetchbyId(cardNum[i]);
+          setProductData([...productData, res.data]);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(productData);
     let val = {
       appoinment: appoinment,
       payment: payment,
       totalAmout: Number(total),
+      treatment: productData,
+      date: date,
       userId: authState.id,
     };
 
@@ -56,11 +80,15 @@ function Checkout() {
         dispatch({ type: "LOADING_COMPLETED" });
         localStorage.removeItem("total");
         localStorage.removeItem("cartId");
+        toast({
+          title: `Your order has been placed!`,
+          status: "success",
+          isClosable: true,
+        });
         setTimeout(() => {
           navigate("/");
         }, 4000);
       } catch (err) {
-        dispatch({ type: "ERROR" });
         console.log(err);
       }
     };
@@ -68,7 +96,7 @@ function Checkout() {
   };
 
   if (state.loading) {
-    return <Heading>Loading...</Heading>;
+    return <Loading />;
   }
   return (
     <Box m="30px 0">

@@ -39,7 +39,7 @@ function Profile() {
         console.log(error);
       }
     };
-    // fetching();
+    fetching();
   }, []);
   if (loading) {
     return <Loading />;

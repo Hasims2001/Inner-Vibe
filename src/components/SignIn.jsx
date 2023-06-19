@@ -49,7 +49,6 @@ export default function SignIn() {
           loginUser({ id: res.id, name: res.name, email: res.email });
           setStatus(true);
           setTimeout(() => {
-            localStorage.setItem("flag", true);
             navigate("/");
           }, 2000);
         }
@@ -80,7 +79,6 @@ export default function SignIn() {
     value.map(({ id, name, email, password }) => {
       if (email === data.email && password === data.password) {
         flag = true;
-        localStorage.setItem("flag", true);
         loginUser({ id: id, name: name, email: email });
       }
     });
