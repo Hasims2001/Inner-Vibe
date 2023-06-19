@@ -10,32 +10,34 @@ Project is a health-focused service website that offers a wide range of treatmen
 
 ## Links
 
-User-Side [link]("https://innervibe.vercel.app/")
+User-Side [link](https://innervibe.vercel.app/)
 
-Email : admin@example.com
-Password : admin
+Email: admin@example.com
+Password: admin
 
-Admin-Side [link]("https://innervibe.vercel.app/Admin")
+Admin-Side [link](https://innervibe.vercel.app/Admin)
 
-API [link]("https://inner-vibe.onrender.com/")
+API [link](https://inner-vibe.onrender.com/)
 
 ## Website Screen
 
 ### Home Screen
 
-![Home](/src/img/homescreen.png)
+![homescreen](https://github.com/Hasims2001/quirky-toothpaste-7817/assets/58412185/62d25c24-521c-4bdd-ac57-d48bbd80f71d)
 
 ### Product Screen
+![productscreen](https://github.com/Hasims2001/quirky-toothpaste-7817/assets/58412185/3c7c4ea5-75bf-4d2f-a858-39e73d6370d8)
 
-![Product](/src/img/productscreen.png)
 
 ### Sign in/ Sign Up Screen
 
-![Sign in/ Sign Up](/src/img/signinscreen.png)
+![signinscreen](https://github.com/Hasims2001/quirky-toothpaste-7817/assets/58412185/0dbb9988-4206-4526-8384-4541db9fc9b5)
+
 
 ### Admin Screen
 
-![Admin](/src/img/adminscreen.png)
+![adminscreen](https://github.com/Hasims2001/quirky-toothpaste-7817/assets/58412185/1d0010c1-4cb0-4522-be12-f7cce1732b62)
+
 
 ## Deployment
 
