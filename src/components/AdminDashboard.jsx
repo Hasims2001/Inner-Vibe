@@ -1,4 +1,13 @@
-import { Box, Stack, Heading, Image, HStack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Stack,
+  Heading,
+  Image,
+  HStack,
+  Text,
+  Container,
+  Button,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import AdminHeader from "./AdminHeader";
 import "../styling/AdminDashboard.css";
@@ -29,6 +38,7 @@ function AdminDashboard() {
   const [today, setToday] = useState(0);
   const [week, setWeek] = useState(0);
   const [month, setMonth] = useState(0);
+  const [val, setVal] = useState(false);
   useEffect(() => {
     dispatch({ type: "LOADING" });
 
@@ -103,10 +113,16 @@ function AdminDashboard() {
     const now = new Date();
     let week = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6);
     week = week.toISOString().split("T")[0];
-    week = week.split("-");
-    week[2] = Math.abs(week[2] - 8);
-    week = week.join("-");
+    // week = week.split("-");
+    // week[2] = Math.abs(week[2] - 8);
+    // week = week.join("-");
 
+    // const temp = new Date();
+    // let month = new Date(
+    //   temp.getFullYear(),
+    //   temp.getMonth(),
+    //   temp.getDate() - 30
+    // );
     const temp = new Date();
     let month = new Date(
       temp.getFullYear(),
@@ -130,7 +146,7 @@ function AdminDashboard() {
     setWeek(sumWeek);
     setMonth(sumMonth);
     dispatch({ type: "LOADING_COMPLETED" });
-  }, [today, week, month]);
+  }, [val]);
 
   return (
     <Box>
@@ -165,6 +181,15 @@ function AdminDashboard() {
             </Text>
           </Box>
         </HStack>
+      </Box>
+      <Box textAlign={"center"} m={"80px 0"}>
+        <Button
+          size={"lg"}
+          variant={"GradientPrimary"}
+          onClick={() => setVal(!val)}
+        >
+          Refresh Data
+        </Button>
       </Box>
     </Box>
   );

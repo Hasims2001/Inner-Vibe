@@ -72,7 +72,7 @@ export function fetchBlogIdData(id) {
 
 // Admin side
 // Login Post
-export function loginAdmin() {
+export function fetchAdmin() {
     let url = `${baseurl}/admins`;
     return axios.get(`${url}`);
 }

@@ -21,6 +21,7 @@ import {
 } from "@chakra-ui/react";
 import { ArrowDownIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
+// 1. Import the utilities
 
 function Home() {
   return (
@@ -120,8 +121,23 @@ function Home() {
       </Flex>
       <Box m="40px 0">
         <Heading m="30px 0">Precious Words</Heading>
-        <HStack>
-          <Box maxW={"30%"} bg={"brand.700"} p={"30px "} borderRadius={"10px"}>
+        <Stack
+          spacing={10}
+          direction={{
+            base: "row",
+            sm: "column",
+            lg: "column",
+            md: "column",
+            xl: "row",
+            "2xl": "column",
+          }}
+        >
+          <Box
+            maxW={["50%", "30%"]}
+            bg={"brand.700"}
+            p={"30px "}
+            borderRadius={"10px"}
+          >
             <HStack justifyContent={"space-between"}>
               <Text fontSize={"lg"} mb={"10px"}>
                 Dan Abrahmov
@@ -139,7 +155,12 @@ function Home() {
               immediate sense of refreshment and revitalization.
             </Text>
           </Box>
-          <Box maxW={"30%"} bg={"brand.700"} p={"30px "} borderRadius={"10px"}>
+          <Box
+            maxW={["50%", "30%"]}
+            bg={"brand.700"}
+            p={"30px "}
+            borderRadius={"10px"}
+          >
             <HStack justifyContent={"space-between"}>
               <Text fontSize={"lg"} mb={"10px"}>
                 Christian
@@ -156,7 +177,12 @@ function Home() {
               and I must say it was an incredible and rejuvenating experience.
             </Text>
           </Box>
-          <Box maxW={"30%"} bg={"brand.700"} p={"30px "} borderRadius={"10px"}>
+          <Box
+            maxW={["50%", "30%"]}
+            bg={"brand.700"}
+            p={"30px "}
+            borderRadius={"10px"}
+          >
             <HStack justifyContent={"space-between"}>
               <Text fontSize={"lg"} mb={"10px"}>
                 Segun Adebayo
@@ -173,7 +199,7 @@ function Home() {
               professional guided me through the entire process.
             </Text>
           </Box>
-        </HStack>
+        </Stack>
       </Box>
     </Box>
   );

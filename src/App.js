@@ -12,6 +12,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import Admin from "./components/Admin";
 // API Link : https://important-boot-bat.cyclic.app/
 
+
 function App() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { authState } = useContext(AuthContext);
@@ -26,7 +27,7 @@ function App() {
     <div className="App" style={{ minHeight: "100vh", backgroundColor: theme ? "#181919" : "#FFFFFF", color: theme ? "#FFFFFF" : "#000" }}>
       {!flag && <Box>
         <Header />
-        <Box style={{ margin: '0px 190px' }}>
+        <Box m={{ base: "0 190px", "2xl": "0 190px", xl: "0 190px", lg: "0 120px", md: "0 80px", sm: "0 20px" }}>
           <AllRouters />
         </Box>
         <Footer />
