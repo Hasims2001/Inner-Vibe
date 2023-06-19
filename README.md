@@ -14,7 +14,7 @@ Project is a health-focused service website that offers a wide range of treatmen
 
 User-Side [link]("https://innervibe.vercel.app/")
 
-Email : admin@example.com,
+Email : admin@example.com
 Password : admin
 
 Admin-Side [link]("https://innervibe.vercel.app/Admin")
@@ -25,9 +25,19 @@ API [link]("https://inner-vibe.onrender.com/")
 
 ### Home Screen
 
-![alt text](http://url/to/img.png)
+![Home](/src/img/homescreen.png)
 
 ### Product Screen
+
+![Product](/src/img/productscreen.png)
+
+### Sign in/ Sign Up Screen
+
+![Sign in/ Sign Up](/src/img/signinscreen.png)
+
+### Admin Screen
+
+![Admin](/src/img/adminscreen.png)
 
 ## Deployment
 
