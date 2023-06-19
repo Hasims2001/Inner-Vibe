@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function AdminHeader() {
   return (
     <div style={{ display: "flex", justifyContent: "space-around" }}>
-      <Link to="/">
+      <Link to="/AdminDashboard">
         <Stack direction="row" align="center">
           <Heading as={"h2"} padding="20px 0 20px 0" fontSize="4xl">
             Inner Vibe
@@ -18,22 +18,27 @@ function AdminHeader() {
         </Stack>
       </Link>
       <HStack spacing={"20px"}>
-        <Link to="/Sales">
+        <Link to="/AdminSales">
           <Button p={" 20px 30px"} variant={"SimplePrimary"}>
             Sales
           </Button>
         </Link>
-        <Link to="/Users">
+        <Link to="/AdminProducts">
+          <Button p={" 20px 30px"} variant={"SimplePrimary"}>
+            Products
+          </Button>
+        </Link>
+        <Link to="/AdminUsers">
           <Button p={" 20px 30px"} variant={"SimplePrimary"}>
             Users
           </Button>
         </Link>
-        <Link to="/Blogs">
+        <Link to="/AdminBlogs">
           <Button p={" 20px 30px"} variant={"SimplePrimary"}>
             Blogs
           </Button>
         </Link>
-        <Link to="/Admins">
+        <Link to="/AdminAdmins">
           <Button p={" 20px 30px"} variant={"SimplePrimary"}>
             Admins
           </Button>

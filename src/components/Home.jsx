@@ -3,7 +3,7 @@ import homeIcon from "../img/home.png";
 import Mobile from "../img/mobile.png";
 import service from "../img/service.png";
 import test from "../img/test.png";
-
+import "../styling/TypingAnimation.css";
 // import ButtonStyle from "../styling/ButtonStyle";
 
 import {
@@ -16,6 +16,8 @@ import {
   Button,
   Flex,
   Container,
+  Avatar,
+  Heading,
 } from "@chakra-ui/react";
 import { ArrowDownIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
@@ -32,10 +34,11 @@ function Home() {
             }}
             alt="HomeIcon"
           />
-          {/* <Text
+          <Text
+            className="typewriter"
             style={{
               position: "absolute",
-              top: "45%",
+              top: "16.5%",
               left: "40%",
               transform: "translate(-50%, -50%)",
             }}
@@ -43,15 +46,16 @@ function Home() {
             Infusion
           </Text>
           <Text
+            className="typewriter"
             style={{
               position: "absolute",
-              top: "55%",
+              top: "20%",
               left: "55%",
               transform: "translate(-50%, -50%)",
             }}
           >
             Therapy
-          </Text> */}
+          </Text>
         </Box>
       </Container>
       <Stack direction={"row"} spacing="10px" justifyContent={"space-between"}>
@@ -114,6 +118,63 @@ function Home() {
           <Image src={test} w={"35%"}></Image>
         </HStack>
       </Flex>
+      <Box m="40px 0">
+        <Heading m="30px 0">Precious Words</Heading>
+        <HStack>
+          <Box maxW={"30%"} bg={"brand.700"} p={"30px "} borderRadius={"10px"}>
+            <HStack justifyContent={"space-between"}>
+              <Text fontSize={"lg"} mb={"10px"}>
+                Dan Abrahmov
+                <Text fontSize={"sm"}>★★★★★ (5/5)</Text>
+              </Text>
+              <Avatar
+                name="Dan Abrahmov"
+                size="lg"
+                src="https://bit.ly/dan-abramov"
+              />
+            </HStack>
+
+            <Text textOverflow={"ellipsis"}>
+              Hydration treatment exceeded my expectations, providing an
+              immediate sense of refreshment and revitalization.
+            </Text>
+          </Box>
+          <Box maxW={"30%"} bg={"brand.700"} p={"30px "} borderRadius={"10px"}>
+            <HStack justifyContent={"space-between"}>
+              <Text fontSize={"lg"} mb={"10px"}>
+                Christian
+                <Text fontSize={"sm"}>★★★★ (4/5)</Text>
+              </Text>
+              <Avatar
+                name="Christian Nwamba"
+                size="lg"
+                src="https://bit.ly/code-beast"
+              />
+            </HStack>
+            <Text textOverflow={"ellipsis"}>
+              I recently had the opportunity to experience hydration treatment,
+              and I must say it was an incredible and rejuvenating experience.
+            </Text>
+          </Box>
+          <Box maxW={"30%"} bg={"brand.700"} p={"30px "} borderRadius={"10px"}>
+            <HStack justifyContent={"space-between"}>
+              <Text fontSize={"lg"} mb={"10px"}>
+                Segun Adebayo
+                <Text fontSize={"sm"}>★★★★★ (4.5/5)</Text>
+              </Text>
+              <Avatar
+                name="Segun Adebayo"
+                size="lg"
+                src="https://bit.ly/sage-adebayo"
+              />
+            </HStack>
+            <Text textOverflow={"ellipsis"}>
+              During my hydration treatment session, a qualified healthcare
+              professional guided me through the entire process.
+            </Text>
+          </Box>
+        </HStack>
+      </Box>
     </Box>
   );
 }
