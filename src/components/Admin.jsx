@@ -18,7 +18,7 @@ import { useContext, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { reducer } from "../utills/reducer";
 import { AuthContext } from "../contextProvider/AuthContextProvider";
-import { loginAdmin } from "../utills/api";
+import { fetchAdmin } from "../utills/api";
 function Admin() {
   const [email, setEmail] = useState("");
   const [flag, setFlag] = useState(false);
@@ -27,10 +27,12 @@ function Admin() {
   const { loginAdmin } = useContext(AuthContext);
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const posting = async () => {
       try {
-        let res = await loginAdmin();
+        let res = await fetchAdmin();
         res = await res?.data;
+        console.log(res);
         if (res) {
           for (let i = 0; i < res.length; i++) {
             if (res[i].email === email && res[i].password === password) {
