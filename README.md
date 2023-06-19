@@ -1,5 +1,3 @@
-
-
 # Inner Vibe
 
 Project is a health-focused service website that offers a wide range of treatments and therapies to enhance well-being. Built with React.js and Chakra UI, the front-end provides a seamless and intuitive user experience. The backend utilizes a mock JSON API to handle data management. Despite its tight timeline of just 5 days, our project delivers a comprehensive platform for accessing health services and information.
