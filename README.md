@@ -4,9 +4,13 @@ Project is a health-focused service website that offers a wide range of treatmen
 
 ## Tech Stack
 
-**Client:** React, Chakra UI.
+![HTML](https://img.icons8.com/?size=60&id=20909&format=png)
+![CSS](https://img.icons8.com/?size=60&id=21278&format=png)
+![JavaScript](https://img.icons8.com/?size=60&id=108784&format=png)
+![react](https://img.icons8.com/?size=60&id=NfbyHexzVEDk&format=png)
+![chakraUI](https://img.icons8.com/?size=60&id=r9QJ0VFFrn7T&format=png)
+![server](https://img.icons8.com/?size=60&id=42947&format=png)
 
-**Server:** Mock JSON API.
 
 ## Links
 
