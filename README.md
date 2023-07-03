@@ -48,9 +48,19 @@ API [link](https://inner-vibe.onrender.com/)
 To deploy this project run
 
 ```bash
+ git clone https://github.com/Hasims2001/quirky-toothpaste-7817.git
+```
+
+open the cloned folder in the command line and run,
+
+```bash
   npm install
 ```
 
+after that,
+```bash
+  npm start
+```
 ## Authors
 
 - [@Hasims2001](https://github.com/Hasims2001)
