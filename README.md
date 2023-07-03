@@ -10,7 +10,7 @@ Project is a health-focused service website that offers a wide range of treatmen
 
 ## Links
 
-User-Side [link](https://innervibe.vercel.app/)
+Deployed Link: [link](https://innervibe.vercel.app/)
 
 Email: admin@example.com
 Password: admin
